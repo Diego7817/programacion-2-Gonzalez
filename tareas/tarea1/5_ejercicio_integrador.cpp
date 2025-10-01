@@ -54,17 +54,26 @@
 using namespace std;
 
 // Función para crear un arreglo dinámico
+/*
+ * EJERCICIO CLASE 1 - PUNTEROS Y MEMORIA DINÁMICA
+ * ================================================
+ */
+
+#include <iostream>
+#include <locale>
+#include <iomanip>
+using namespace std;
+
+// Función para crear un arreglo dinámico
 int* crearArreglo(int tamanio) {
-    // Validar que tamanio sea positivo
+
     if (tamanio <= 0) {
         cout << "Error: El tamaño debe ser un número positivo." << endl;
         return nullptr;
     }
 
-    // Crear arreglo dinámico con new
     int* nuevoArreglo = new int[tamanio];
 
-    // Verificar que new no retorne nullptr
     if (nuevoArreglo == nullptr) {
         cout << "Error: No se pudo asignar memoria." << endl;
         return nullptr;
@@ -75,13 +84,12 @@ int* crearArreglo(int tamanio) {
 
 // Función para llenar el arreglo con valores del usuario
 void llenarArreglo(int* arreglo, int tamanio) {
-    // Verificar que arreglo no sea nullptr
+
     if (arreglo == nullptr) {
         cout << "Error: El arreglo no ha sido creado." << endl;
         return;
     }
 
-    // Pedir valores al usuario
     cout << "Ingrese " << tamanio << " valores para el arreglo:" << endl;
     for (int i = 0; i < tamanio; i++) {
         cout << "Valor [" << i << "]: ";
@@ -91,19 +99,17 @@ void llenarArreglo(int* arreglo, int tamanio) {
 
 // Función para mostrar todos los elementos del arreglo
 void mostrarArreglo(int* arreglo, int tamanio) {
-    // Verificar que arreglo no sea nullptr
+
     if (arreglo == nullptr) {
         cout << "Error: El arreglo no ha sido creado." << endl;
         return;
     }
 
-    // Manejar caso de arreglo vacío
     if (tamanio == 0) {
         cout << "El arreglo está vacío." << endl;
         return;
     }
 
-    // Mostrar todos los elementos del arreglo
     cout << "Elementos del arreglo: ";
     for (int i = 0; i < tamanio; i++) {
         cout << arreglo[i] << " ";
@@ -113,13 +119,17 @@ void mostrarArreglo(int* arreglo, int tamanio) {
 
 // Función para encontrar el número mayor
 int encontrarMayor(int* arreglo, int tamanio) {
-    // Verificar que arreglo no sea nullptr y tamanio > 0
-    if (arreglo == nullptr || tamanio <= 0) {
-        cout << "Error: Arreglo no válido para buscar el mayor." << endl;
+
+    if (arreglo == nullptr) {
+        cout << "Error: El arreglo no ha sido creado." << endl;
         return 0;
     }
 
-    // Buscar el número mayor en el arreglo
+    if (tamanio <= 0) {
+        cout << "Error: El arreglo está vacío." << endl;
+        return 0;
+    }
+
     int mayor = arreglo[0];
     for (int i = 1; i < tamanio; i++) {
         if (arreglo[i] > mayor) {
@@ -130,11 +140,15 @@ int encontrarMayor(int* arreglo, int tamanio) {
     return mayor;
 }
 
-// Función para calcular el promedio
+// Función para calcular el promedio (versión mejorada)
 float calcularPromedio(int* arreglo, int tamanio) {
-    // Verificar que arreglo no sea nullptr y tamanio > 0
-    if (arreglo == nullptr || tamanio <= 0) {
-        cout << "Error: Arreglo no válido para calcular promedio." << endl;
+    if (arreglo == nullptr) {
+        cout << "Error: El arreglo no ha sido creado." << endl;
+        return 0.0f;
+    }
+
+    if (tamanio <= 0) {
+        cout << "Error: El arreglo está vacío." << endl;
         return 0.0f;
     }
 
@@ -144,7 +158,6 @@ float calcularPromedio(int* arreglo, int tamanio) {
         suma += arreglo[i];
     }
 
-    // Dividir por el tamaño y retornar el promedio
     return static_cast<float>(suma) / tamanio;
 }
 
@@ -152,55 +165,14 @@ float calcularPromedio(int* arreglo, int tamanio) {
 void liberarArreglo(int*& arreglo) {
     // Verificar que arreglo no sea nullptr
     if (arreglo != nullptr) {
-        // Liberar memoria con delete[]
+
         delete[] arreglo;
-        // Asignar nullptr al puntero
+
         arreglo = nullptr;
         cout << "Memoria liberada correctamente." << endl;
+    } else {
+        cout << "El arreglo ya está liberado." << endl;
     }
-}
-
-// Función para llenar el arreglo con valores del usuario
-void llenarArreglo(int* arreglo, int tamanio) {
-    // TODO: Implementar esta función
-    // - Verificar que arreglo no sea nullptr
-    // - Pedir valores al usuario
-    // - Llenar el arreglo con los valores ingresados
-}
-
-// Función para mostrar todos los elementos del arreglo
-void mostrarArreglo(int* arreglo, int tamanio) {
-    // TODO: Implementar esta función
-    // - Verificar que arreglo no sea nullptr
-    // - Mostrar todos los elementos del arreglo
-    // - Manejar caso de arreglo vacío
-}
-
-// Función para encontrar el número mayor
-int encontrarMayor(int* arreglo, int tamanio) {
-    // TODO: Implementar esta función
-    // - Verificar que arreglo no sea nullptr y tamanio > 0
-    // - Buscar el número mayor en el arreglo
-    // - Retornar el número mayor
-    return 0; // Placeholder
-}
-
-// Función para calcular el promedio
-float calcularPromedio(int* arreglo, int tamanio) {
-    // TODO: Implementar esta función
-    // - Verificar que arreglo no sea nullptr y tamanio > 0
-    // - Sumar todos los elementos
-    // - Dividir por el tamaño
-    // - Retornar el promedio
-    return 0.0f; // Placeholder
-}
-
-// Función para liberar la memoria del arreglo
-void liberarArreglo(int*& arreglo) {
-    // TODO: Implementar esta función
-    // - Verificar que arreglo no sea nullptr
-    // - Liberar memoria con delete[]
-    // - Asignar nullptr al puntero
 }
 
 // Función para mostrar el menú
